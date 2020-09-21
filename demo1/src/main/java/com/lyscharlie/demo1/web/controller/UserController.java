@@ -3,23 +3,18 @@ package com.lyscharlie.demo1.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.lyscharlie.demo1.biz.entity.UserDO;
 import com.lyscharlie.demo1.biz.service.UserService;
-import com.lyscharlie.demo1.commom.dto.R;
 import com.lyscharlie.demo1.web.vo.UserVO;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,41 +38,6 @@ public class UserController {
 			resultList.add(vo);
 		}
 		return resultList;
-	}
-
-	@ApiOperation(value = "登录")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "username", dataType = "string", defaultValue = ""),
-			@ApiImplicitParam(name = "password", dataType = "string", defaultValue = "")
-	})
-	@PostMapping(value = "login.php")
-	public R<String> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-		R<String> r = new R<>();
-
-		if (StringUtils.isBlank(username)) {
-			r.setSuccess(false);
-			r.setMsg("请输入用户名");
-			return r;
-		}
-
-		if (StringUtils.isBlank(password)) {
-			r.setSuccess(false);
-			r.setMsg("请输入密码");
-			return r;
-		}
-
-		UserDO user = this.userService.findUserByNameAndPassword(username, password);
-
-		if (null == user) {
-			r.setSuccess(false);
-			r.setMsg("用户名密码错误");
-			return r;
-		}
-
-		r.setSuccess(true);
-		r.setData("abc");
-		r.setMsg("登录成功");
-		return r;
 	}
 
 }

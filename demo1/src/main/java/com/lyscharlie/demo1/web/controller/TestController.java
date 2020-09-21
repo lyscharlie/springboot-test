@@ -32,7 +32,7 @@ public class TestController {
 
 	@ApiOperation(value = "test1")
 	@ApiImplicitParam(name = "v", value = "v", dataType = "string")
-	@RequestMapping(value = "/test1.htm",method = RequestMethod.GET)
+	@RequestMapping(value = "/test1.htm", method = RequestMethod.GET)
 	public String test1(@RequestParam(value = "v", defaultValue = "") String v) {
 		return v;
 	}
@@ -72,7 +72,7 @@ public class TestController {
 	})
 	@RequestMapping(value = "/test5/{a}-{b}.htm", method = RequestMethod.GET)
 	public Map<String, Object> test5(@PathVariable String a, @PathVariable String b) {
-		Map<String, Object> map= new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("a", a);
 		map.put("b", b);
 		return map;
@@ -85,7 +85,7 @@ public class TestController {
 	})
 	@RequestMapping(value = "/test6.htm", method = RequestMethod.POST)
 	public Map<String, Object> test6(@RequestParam String a, @RequestParam String b) {
-		Map<String, Object> map= new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("a", a);
 		map.put("b", b);
 		return map;
