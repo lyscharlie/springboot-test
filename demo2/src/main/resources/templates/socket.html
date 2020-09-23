@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>WebSocket</title>
 </head>
 <body>
 <h3>hello socket</h3>
-<div> from：<input id="from" name="from" type="text" value="001"></div>
-<div> to：<input id="to" name="to" type="text" value="002"></div>
-<div> content：<input id="content" name="content" type="text" value="hello websocket"></div>
+<div><label>from：<input id="from" name="from" type="text" value="001"></label></div>
+<div><label>to：<input id="to" name="to" type="text" value="002"></label></div>
+<div><label>content：<input id="content" name="content" type="text" value="hello websocket"></label></div>
 <div>
     操作:
     <button onclick="openSocket()">开启socket</button>
@@ -18,8 +18,8 @@
 
 </div>
 </body>
-<script>
-    var socket;
+<script type="text/javascript">
+    let socket;
 
     function openSocket() {
         if (typeof (WebSocket) == "undefined") {
@@ -27,8 +27,8 @@
         } else {
             console.log("您的浏览器支持WebSocket");
             //实现化WebSocket对象，指定要连接的服务器地址与端口  建立连接
-            var from = document.getElementById('from').value;
-            var socketUrl = "ws://127.0.0.1:8082/demo2/webSocket/" + from;
+            let from = document.getElementById('from').value;
+            let socketUrl = "ws://127.0.0.1:8082/demo2/webSocket/" + from;
             console.log(socketUrl);
             if (socket != null) {
                 socket.close();
@@ -42,10 +42,10 @@
             };
             //获得消息事件
             socket.onmessage = function (msg) {
-                var serverMsg = "收到信息：" + msg.data;
+                let serverMsg = "收到信息：" + msg.data;
                 console.log(serverMsg);
                 //发现消息进入    开始处理前端触发逻辑
-                var p = '<p style="color: brown">' + serverMsg + '</p>';
+                let p = '<p style="color: brown">' + serverMsg + '</p>';
                 document.getElementById('contents').innerHTML = document.getElementById('contents').innerHTML + p;
             };
             //关闭事件
@@ -64,13 +64,13 @@
             console.log("您的浏览器不支持WebSocket");
         } else {
             // console.log("您的浏览器支持WebSocket");
-            var to = document.getElementById('to').value;
-            var from = document.getElementById('from').value;
-            var content = document.getElementById('content').value;
-            var msg = '{"to":"' + to + '","from":"' + from + '","content":"' + content + '"}';
+            let to = document.getElementById('to').value;
+            let from = document.getElementById('from').value;
+            let content = document.getElementById('content').value;
+            let msg = '{"to":"' + to + '","from":"' + from + '","content":"' + content + '"}';
             console.log(msg);
             socket.send(msg);
-            var p = '<p style="color: blue">发送信息：' + content + '</p>';
+            let p = '<p style="color: blue">发送信息：' + content + '</p>';
             document.getElementById('contents').innerHTML = document.getElementById('contents').innerHTML + p;
         }
     }
